@@ -15,7 +15,7 @@
         <!--Test. New:-->
         <jdk.version>1.8</jdk.version>
 
-        <spring.version>3.2.16.RELEASE</spring.version>
+        <spring.version>5.2.1.RELEASE</spring.version>
         <jstl.version>1.2</jstl.version>
         <servletapi.version>2.5</servletapi.version>
         <slf4j.version>1.7.6</slf4j.version>
