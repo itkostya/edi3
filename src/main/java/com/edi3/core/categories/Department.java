@@ -15,6 +15,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "CAT_DEPARTMENT")
+//@Entity(name = "department")
+//@Table(schema = "edi3", name = "department")
 public class Department extends AbstractCategory {
 
     @OneToMany(mappedBy = "department")

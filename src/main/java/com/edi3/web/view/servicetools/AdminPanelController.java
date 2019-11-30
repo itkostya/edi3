@@ -2,14 +2,16 @@ package com.edi3.web.view.servicetools;
 
 
 //import categories.User;
-//import hibernate.impl.categories.UserImpl;
+//import hibernate.impl.categories.UserDaoImpl;
 //import impl.categories.UserServiceImpl;
 //import model.SessionParameter;
 //import service_tools.CreatedataServiceImpl;
 //import tools.PageContainer;
 
-import com.edi3.service.CreatedataService;
-import com.edi3.service.UserService;
+import com.edi3.core.categories.User;
+import com.edi3.service.i.service_tools.CreatedataService;
+import com.edi3.service.i.categories.UserService;
+import com.edi3.web.model.SessionParameter;
 import com.edi3.web.tools.PageContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,11 +21,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 
 @Controller
 @RequestMapping(value = {PageContainer.ADMIN_PAGE})
-public class AdminPanelController extends HttpServlet {
+public class AdminPanelController {
 
     private CreatedataService createdataService;
     private UserService userService;
@@ -35,30 +38,30 @@ public class AdminPanelController extends HttpServlet {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    protected ModelAndView doGet(){
-
+    protected ModelAndView doGet(HttpServletRequest req){
+//        System.out.println("AdminPanelController - doGet()");
         boolean isDatabaseEmpty =  userService.isDatabaseEmpty();
-        System.out.println("AdminPanelController - doGet()");
+        ModelAndView model;
 
-        if (isDatabaseEmpty) {
-            ModelAndView model = new ModelAndView(PageContainer.ADMIN_JSP);
+        if (isDatabaseEmpty || SessionParameter.INSTANCE.adminAccessAllowed(req)) {
+//            System.out.println("AdminPanelController - isDatabaseEmpty (ADMIN_JSP)");
+            model = new ModelAndView(PageContainer.ADMIN_JSP);
             model.addObject("isDatabaseEmpty", isDatabaseEmpty);
             model.addObject("newUsersCount", 0);
-            return model;
         } else {
-            //User currentUser = SessionParameter.INSTANCE.getCurrentUser(req);
-
+//            System.out.println("AdminPanelController - ERROR_JSP");
+            model = new ModelAndView(PageContainer.ERROR_JSP);
+            User currentUser = SessionParameter.INSTANCE.getCurrentUser(req);
+            model.addObject("error_message", (Objects.isNull(currentUser) ? "You should pass authorization first" : String.format("User %s doesn't have admin role", currentUser.getName())));
         }
 
-        return null;
+        return model;
     }
-
 
     @ResponseBody
     @RequestMapping(method = RequestMethod.POST)
-    protected void doPost(@RequestParam(value = "param") Integer param){
-
-        System.out.println("AdminPanelController - doPost()");
+    protected ModelAndView doPost(@RequestParam(value = "param") Integer param, HttpServletRequest req){
+//        System.out.println("AdminPanelController - doPost()");
 
         switch (param) {
                 case 1:
@@ -66,14 +69,12 @@ public class AdminPanelController extends HttpServlet {
                     if (userService.isDatabaseEmpty()) {
                         System.out.println("AdminPanelController - doPost() createCategories()");
                         createdataService.createCategories();
-                        //CreatedataServiceImpl.createCategories();
                         // After creation user has admin access
-                       // SessionParameter.INSTANCE.setCurrentUser(req, UserImpl.INSTANCE.getUserById(8L));
+                        SessionParameter.INSTANCE.setCurrentUser(req, userService.getUserById(8L));
                     }
                     break;
             }
 
-        doGet();
-
+        return doGet(req);
     }
 }

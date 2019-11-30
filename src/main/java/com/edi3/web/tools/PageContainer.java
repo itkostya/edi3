@@ -27,16 +27,16 @@ public enum PageContainer {
     public static final String ADMIN_JSP = "work_area/admin";
 
     public static final String USER_PAGE = "/user";
-    public static final String USER_JSP = "WEB-INF/views/jsp/authorization/user.jsp";
+    public static final String USER_JSP = "authorization/user";
 
-    public static final String ERROR_JSP = "WEB-INF/views/jsp/authorization/error.jsp";
+    public static final String ERROR_JSP = "authorization/error";
 
     public static final String WORK_AREA_PAGE = "/work_area";
-    public static final String WORK_AREA_JSP = "WEB-INF/views/jsp/work_area/work_area_main.jsp";
+    public static final String WORK_AREA_JSP = "work_area/work_area_main";
 
-    private static final String CATEGORY_COMMON_CHOICE_JSP =  "WEB-INF/views/jsp/category/category_choice.jsp";
-    private static final String CATEGORY_COMMON_ELEMENT_JSP = "WEB-INF/views/jsp/category/category_element.jsp";
-    private static final String CATEGORY_COMMON_JOURNAL_JSP = "WEB-INF/views/jsp/category/category_journal.jsp";
+    private static final String CATEGORY_COMMON_CHOICE_JSP =  "category/category_choice";
+    private static final String CATEGORY_COMMON_ELEMENT_JSP = "category/category_element";
+    private static final String CATEGORY_COMMON_JOURNAL_JSP = "category/category_journal";
 
     public static final String CATEGORY_CONTRACTOR_CHOICE_PAGE = "/cat_contractor_choice";
     public static final String CATEGORY_CONTRACTOR_CHOICE_JSP = CATEGORY_COMMON_CHOICE_JSP;
@@ -103,23 +103,23 @@ public enum PageContainer {
 
     public static final String DOCUMENT_MEMORANDUM_JOURNAL_PAGE = "/doc_memorandum_journal";
     @SuppressWarnings("WeakerAccess")
-    public static final String DOCUMENT_MEMORANDUM_JOURNAL_JSP = "WEB-INF/views/jsp/documents/memorandum_journal.jsp";
+    public static final String DOCUMENT_MEMORANDUM_JOURNAL_JSP = "documents/memorandum_journal";
 
     public static final String DOCUMENT_MEMORANDUM_CREATE_PAGE = "/doc_memorandum_create";
-    public static final String DOCUMENT_MEMORANDUM_CREATE_JSP = "WEB-INF/views/jsp/documents/memorandum_create.jsp";
+    public static final String DOCUMENT_MEMORANDUM_CREATE_JSP = "documents/memorandum_create";
 
     public static final String DOCUMENT_MESSAGE_JOURNAL_PAGE = "/doc_message_journal";
     @SuppressWarnings("WeakerAccess")
-    public static final String DOCUMENT_MESSAGE_JOURNAL_JSP = "WEB-INF/views/jsp/documents/message_journal.jsp";
+    public static final String DOCUMENT_MESSAGE_JOURNAL_JSP = "documents/message_journal";
 
     public static final String DOCUMENT_MESSAGE_CREATE_PAGE = "/doc_message_create";
-    public static final String DOCUMENT_MESSAGE_CREATE_JSP = "WEB-INF/views/jsp/documents/message_create.jsp";
+    public static final String DOCUMENT_MESSAGE_CREATE_JSP = "documents/message_create";
 
     public static final String EXECUTOR_TASK_PAGE = "/executor_task";
-    public static final String EXECUTOR_TASK_JSP = "WEB-INF/views/jsp/business_processes/executor_task.jsp";
+    public static final String EXECUTOR_TASK_JSP = "business_processes/executor_task";
 
     public static final String DATA_PROCESSOR_SET_RIGHTS_PAGE = "/data_processor_set_rights";
-    public static final String DATA_PROCESSOR_SET_RIGHTS_JSP = "WEB-INF/views/jsp/data_processors/set_rights.jsp";
+    public static final String DATA_PROCESSOR_SET_RIGHTS_JSP = "data_processors/set_rights";
 
     public static final String DOWNLOAD_PAGE = "/download";
 

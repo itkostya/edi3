@@ -1,14 +1,14 @@
 <%--@elvariable id="TimeModule" type="enumerations"--%>
-<%@ page import="app_info.TimeModule" %>
+<%@ page import="com.edi3.core.app_info.TimeModule" %>
 
 <%--@elvariable id="DocumentProperty" type="enumerations"--%>
-<%@ page import="documents.DocumentProperty" %>
+<%@ page import="com.edi3.core.documents.DocumentProperty" %>
 
 <%--@elvariable id="CommonModule" type="enumerations"--%>
-<%@ page import="tools.CommonModule" %>
+<%@ page import="com.edi3.web.tools.CommonModule" %>
 
 <%--@elvariable id="PageContainer" type="enumerations"--%>
-<%@ page import="tools.PageContainer" %>
+<%@ page import="com.edi3.web.tools.PageContainer" %>
 
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -390,7 +390,7 @@
     </div>
 </div>
 
-<form method="post" action="${pageContext.request.contextPath}/work_area" style="overflow:hidden; height:96%"
+<form method="post" action="${pageContext.request.contextPath}${PageContainer.WORK_AREA_PAGE}" style="overflow:hidden; height:96%"
       autocomplete="off" name="work_area" id="work_area">
 
     <h1 class="user_presentation" id="user-presentation">${userPresentation}</h1>
@@ -401,7 +401,7 @@
                 <td>
                     <div class="relative-with-border" id="div-document-message">
                         <div>
-                            <a href='${pageContext.request.contextPath}/doc_message_journal'>
+                            <a href='${pageContext.request.contextPath}${PageContainer.DOCUMENT_MESSAGE_JOURNAL_PAGE}'>
                                 <img src="${pageContext.request.contextPath}/resources/images/documents/message/work_area.png"
                                      alt="Сообщение" class="button_blue" name="doc-image"></a>
                         </div>
@@ -413,7 +413,7 @@
                 <td>
                     <div class="relative-with-border" id="div-document-memorandum">
                         <div>
-                            <a href='${pageContext.request.contextPath}/doc_memorandum_journal'>
+                            <a href='${pageContext.request.contextPath}${PageContainer.DOCUMENT_MEMORANDUM_JOURNAL_PAGE}'>
                                 <img src="${pageContext.request.contextPath}/resources/images/documents/memorandum/work_area.png"
                                      alt="Служебная записка" class="button_lime" name="doc-image"></a>
                         </div>
@@ -685,13 +685,13 @@
     <input type="hidden" name="operationType">
 </form>
 
-<form hidden action="${pageContext.request.contextPath}/executor_task" id="formOpenTask" target="_blank">
+<form hidden action="${pageContext.request.contextPath}${PageContainer.EXECUTOR_TASK_PAGE}" id="formOpenTask" target="_blank">
     <input type="hidden" name="documentId"/>
     <input type="hidden" name="executorTaskId"/>
     <input type="hidden" name="tempId"/>
 </form>
 
-<form hidden action="${pageContext.request.contextPath}/work_area">
+<form hidden action="${pageContext.request.contextPath}${PageContainer.WORK_AREA_PAGE}">
     <input type="hidden" name="mapSortValue"/>
 </form>
 
