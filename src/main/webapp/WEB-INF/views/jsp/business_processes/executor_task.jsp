@@ -1,23 +1,23 @@
 <%--@elvariable id="Constant" type="enumerations"--%>
-<%@ page import="app_info.Constant" %>
+<%@ page import="com.edi3.core.app_info.Constant" %>
 
 <%--@elvariable id="TimeModule" type="enumerations"--%>
-<%@ page import="app_info.TimeModule" %>
+<%@ page import="com.edi3.core.app_info.TimeModule" %>
 
 <%--@elvariable id="ProcessResult" type="enumerations"--%>
-<%@ page import="enumerations.ProcessResult" %>
+<%@ page import="com.edi3.core.enumerations.ProcessResult" %>
 
 <%--@elvariable id="ProcessType" type="enumerations"--%>
-<%@ page import="enumerations.ProcessType" %>
+<%@ page import="com.edi3.core.enumerations.ProcessType" %>
 
 <%--@elvariable id="ElementStatus" type="enumerations"--%>
-<%@ page import="model.ElementStatus" %>
+<%@ page import="com.edi3.web.model.ElementStatus" %>
 
 <%--@elvariable id="CommonModule" type="enumerations"--%>
-<%@ page import="tools.CommonModule" %>
+<%@ page import="com.edi3.web.tools.CommonModule" %>
 
 <%--@elvariable id="PageContainer" type="enumerations"--%>
-<%@ page import="tools.PageContainer" %>
+<%@ page import="com.edi3.web.tools.PageContainer" %>
 
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -726,7 +726,7 @@
 <div id="review_document"></div>
 
 <a href="#" class="overlay_send_to_users" id="form_send_to_users"></a>
-<form method="post" action="${pageContext.request.contextPath}/executor_task" class="modal_send_to_users"
+<form method="post" action="${pageContext.request.contextPath}${PageContainer.EXECUTOR_TASK_PAGE}" class="modal_send_to_users"
       name="menu_send_to_users" id="menu_send_to_users" enctype="multipart/form-data">
 </form>
 

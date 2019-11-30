@@ -2,19 +2,19 @@ package com.edi3.service.impl.service_tools;
 
 //import categories.*;
 //import hibernate.impl.categories.AbstractCategoryImpl;
-//import hibernate.impl.categories.DepartmentImpl;
-//import hibernate.impl.categories.PositionImpl;
-//import hibernate.impl.categories.UserImpl;
+//import hibernate.impl.categories.DepartmentDaoImpl;
+//import hibernate.impl.categories.PositionDaoImpl;
+//import hibernate.impl.categories.UserDaoImpl;
 //import impl.information_registers.UserAccessRightServiceImpl;
 
 import com.edi3.core.categories.Department;
 import com.edi3.core.categories.Position;
 import com.edi3.core.categories.User;
 import com.edi3.core.categories.UserRole;
-import com.edi3.dao.DepartmentDao;
-import com.edi3.dao.PositionDao;
-import com.edi3.dao.UserDao;
-import com.edi3.service.CreatedataService;
+import com.edi3.dao.i.categories.DepartmentDao;
+import com.edi3.dao.i.categories.PositionDao;
+import com.edi3.dao.i.categories.UserDao;
+import com.edi3.service.i.service_tools.CreatedataService;
 
 public class CreatedataServiceImpl implements CreatedataService {
 
@@ -23,6 +23,7 @@ public class CreatedataServiceImpl implements CreatedataService {
     private UserDao userDao;
 
     public void createCategories() {
+        System.out.println("createCategories() begin");
 
         // Departments
         Department departmentIt = new Department("It");
@@ -102,6 +103,7 @@ public class CreatedataServiceImpl implements CreatedataService {
 //        AbstractCategoryImpl.INSTANCE.save(new PlanningPeriod("Декабрь 2017", Date.valueOf("2017-12-01"), Date.valueOf("2017-12-31")));
 //        AbstractCategoryImpl.INSTANCE.save(new PlanningPeriod("Январь 2018", Date.valueOf("2018-01-01"), Date.valueOf("2018-01-31")));
 
+        System.out.println("createCategories() end");
     }
 
     public DepartmentDao getDepartmentDao() {

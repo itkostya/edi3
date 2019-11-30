@@ -1,14 +1,14 @@
 <%--@elvariable id="TimeModule" type="enumerations"--%>
-<%@ page import="app_info.TimeModule" %>
+<%@ page import="com.edi3.core.app_info.TimeModule" %>
 
 <%--@elvariable id="FolderStructure" type="enumerations"--%>
-<%@ page import="enumerations.FolderStructure" %>
+<%@ page import="com.edi3.core.enumerations.FolderStructure" %>
 
 <%--@elvariable id="ProcessResult" type="enumerations"--%>
-<%@ page import="enumerations.ProcessResult" %>
+<%@ page import="com.edi3.core.enumerations.ProcessResult" %>
 
 <%--@elvariable id="CommonModule" type="enumerations"--%>
-<%@ page import="tools.CommonModule" %>
+<%@ page import="com.edi3.web.tools.CommonModule" %>
 
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

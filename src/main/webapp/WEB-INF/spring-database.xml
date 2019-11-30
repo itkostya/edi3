@@ -1,18 +1,18 @@
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-    http://www.springframework.org/schema/aop
-    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
-    http://www.springframework.org/schema/tx
-    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+ <beans xmlns="http://www.springframework.org/schema/beans"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:aop="http://www.springframework.org/schema/aop"
+           xmlns:tx="http://www.springframework.org/schema/tx"
+           xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        https://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- MySQL data source -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
-
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost:3306/edi3"/>
         <property name="username" value="root"/>
@@ -20,79 +20,135 @@
     </bean>
 
     <!-- Hibernate session factory -->
-    <bean id="sessionFactory"
-          class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="annotatedClasses">
             <list>
                 <value>com.edi3.core.categories.Position</value>
                 <value>com.edi3.core.categories.Department</value>
                 <value>com.edi3.core.categories.User</value>
+                <value>com.edi3.core.categories.UploadedFile</value>
+
+                <value>com.edi3.core.abstract_entity.AbstractDocumentEdi</value>
+                <value>com.edi3.core.documents.Memorandum</value>
+                <value>com.edi3.core.documents.Message</value>
+                <value>com.edi3.core.documents.DocumentNumeration</value>
+
+                <value>com.edi3.core.business_processes.BusinessProcess</value>
+                <value>com.edi3.core.business_processes.BusinessProcessSequence</value>
+                <value>com.edi3.core.business_processes.ExecutorTask</value>
+                <value>com.edi3.core.business_processes.ExecutorTaskFolderStructure</value>
             </list>
         </property>
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/edi3</prop>
-                <prop key="hibernate.connection.username">root</prop>
-                <prop key="hibernate.connection.password">root</prop>
-                <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
-                <prop key="connection.autocommit">true</prop>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-                <prop key="hibernate.format_sql">true</prop>
-                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL57Dialect</prop>
+                <prop key="hibernate.show_sql">false</prop>
             </props>
         </property>
     </bean>
 
-    <!-- User -->
-    <bean id="userDao" class="com.edi3.dao.impl.categories.UserImpl">
+    <!-- DAO categories -->
+
+    <bean id="userDao" class="com.edi3.dao.impl.categories.UserDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean id="departmentDao" class="com.edi3.dao.impl.categories.DepartmentImpl">
+    <bean id="departmentDao" class="com.edi3.dao.impl.categories.DepartmentDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean id="positionDao" class="com.edi3.dao.impl.categories.PositionImpl">
+    <bean id="positionDao" class="com.edi3.dao.impl.categories.PositionDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+
+     <bean id="uploadedFileDao" class="com.edi3.dao.impl.categories.UploadedFileDaoImpl">
+         <property name="sessionFactory" ref="sessionFactory"/>
+     </bean>
+
+     <!-- DAO documents -->
+
+     <bean id="documentNumerationDao" class="com.edi3.dao.impl.documents.DocumentNumerationDaoImpl">
+         <property name="sessionFactory" ref="sessionFactory"/>
+     </bean>
+
+     <bean id="documentDao" class="com.edi3.dao.impl.documents.DocumentDaoImpl">
+         <property name="sessionFactory" ref="sessionFactory"/>
+         <property name="documentNumerationDao" ref="documentNumerationDao"/>
+     </bean>
+
+     <!-- DAO business processes -->
+
+     <bean id="businessProcessDao" class="com.edi3.dao.impl.business_processes.BusinessProcessDaoImpl">
+         <property name="sessionFactory" ref="sessionFactory"/>
+     </bean>
+
+     <bean id="businessProcessSequenceDao" class="com.edi3.dao.impl.business_processes.BusinessProcessSequenceDaoImpl">
+         <property name="sessionFactory" ref="sessionFactory"/>
+     </bean>
+
+     <bean id="executorTaskDao" class="com.edi3.dao.impl.business_processes.ExecutorTaskDaoImpl">
+         <property name="sessionFactory" ref="sessionFactory"/>
+     </bean>
+
+     <bean id="executorTaskFolderStructureDao" class="com.edi3.dao.impl.business_processes.ExecutorTaskFolderStructureDaoImpl">
+         <property name="sessionFactory" ref="sessionFactory"/>
+     </bean>
+
+     <!-- Service categories-->
+
+     <bean id="uploadedFileService" class="com.edi3.service.impl.categories.UploadedFileServiceImpl">
+         <property name="uploadedFileDao" ref="uploadedFileDao"/>
+     </bean>
 
     <bean id="userService" class="com.edi3.service.impl.categories.UserServiceImpl">
         <property name="userDao" ref="userDao"/>
     </bean>
 
-    <bean id="createDataService" class="com.edi3.service.impl.service_tools.CreatedataServiceImpl">
+     <!-- Service documents-->
+
+     <bean id="memorandumService" class="com.edi3.service.impl.documents.MemorandumServiceImpl">
+         <property name="documentDao" ref="documentDao"/>
+     </bean>
+
+     <!-- Service business processes-->
+
+     <bean id="businessProcessSequenceService" class="com.edi3.service.impl.business_process.BusinessProcessSequenceServiceImpl">
+         <property name="businessProcessSequenceDao" ref="businessProcessSequenceDao"/>
+     </bean>
+
+     <bean id="businessProcessService" class="com.edi3.service.impl.business_process.BusinessProcessServiceImpl">
+         <property name="businessProcessDao" ref="businessProcessDao"/>
+         <property name="businessProcessSequenceDao" ref="businessProcessSequenceDao"/>
+         <property name="businessProcessSequenceService" ref="businessProcessSequenceService"/>
+         <property name="executorTaskDao" ref="executorTaskDao"/>
+         <property name="executorTaskService" ref="executorTaskService"/>
+         <property name="executorTaskFolderStructureDao" ref="executorTaskFolderStructureDao"/>
+         <property name="uploadedFileService" ref="uploadedFileService"/>
+         <property name="userService" ref="userService"/>
+     </bean>
+
+     <bean id="executorTaskService" class="com.edi3.service.impl.business_process.ExecutorTaskServiceImpl">
+         <property name="executorTaskDao" ref="executorTaskDao"/>
+     </bean>
+
+     <bean id="executorTaskFolderStructureService" class="com.edi3.service.impl.business_process.ExecutorTaskFolderStructureServiceImpl">
+         <property name="executorTaskFolderStructureDao" ref="executorTaskFolderStructureDao"/>
+     </bean>
+
+     <bean id="createDataService" class="com.edi3.service.impl.service_tools.CreatedataServiceImpl">
         <property name="departmentDao" ref="departmentDao"/>
         <property name="positionDao" ref="positionDao"/>
         <property name="userDao" ref="userDao"/>
     </bean>
 
-
-    <!-- UserDetails -->
-    <!--<bean id="userDetailsDao" class="com.levelup.dao.impl.UserDetailsDaoImpl">-->
-        <!--<property name="sessionFactory" ref="sessionFactory"/>-->
-    <!--</bean>-->
-
-    <!--<bean id="userDetailsService"-->
-          <!--class="com.levelup.service.impl.UserDetailsServiceImpl">-->
-        <!--<property name="userDetailsDao" ref="userDetailsDao"/>-->
-    <!--</bean>-->
-
-    <!-- Geography -->
-    <!--<bean id="geographyDao" class="com.levelup.dao.impl.GeographyDaoImpl">-->
-        <!--<property name="sessionFactory" ref="sessionFactory"/>-->
-    <!--</bean>-->
-
-    <!--<bean id="geographyService"-->
-          <!--class="com.levelup.service.impl.GeographyServiceImpl">-->
-        <!--<property name="geographyDao" ref="geographyDao"/>-->
-    <!--</bean>-->
-
-    <!-- MUST have transaction manager, using aop and aspects  -->
     <bean id="transactionManager"
-          class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+          class="org.springframework.orm.hibernate5.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+
+    <tx:annotation-driven/>
 
     <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
         <!--<tx:attributes>-->

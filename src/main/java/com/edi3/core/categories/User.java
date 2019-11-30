@@ -9,13 +9,19 @@ package com.edi3.core.categories;
 //import documents.Memorandum;
 //import information_registers.UserAccessRight;
 
-
-
 import com.edi3.core.abstract_entity.AbstractCategory;
+import com.edi3.core.abstract_entity.AbstractDocumentEdi;
+import com.edi3.core.business_processes.BusinessProcess;
+import com.edi3.core.business_processes.BusinessProcessSequence;
+import com.edi3.core.business_processes.ExecutorTask;
+import com.edi3.core.business_processes.ExecutorTaskFolderStructure;
+import com.edi3.core.documents.Memorandum;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /*
  * Information about users
@@ -26,7 +32,9 @@ import java.util.Objects;
 @Table(name = "CAT_USER",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"login", "domain"})}
 )
-public class User extends AbstractCategory{
+//@Entity(name = "user")
+//@Table(schema = "edi3", name = "user")
+public class User extends AbstractCategory {
 
     @Column(name = "last_name")
     private String lastName;
@@ -89,6 +97,11 @@ public class User extends AbstractCategory{
 
     public User(String name) {
         super(name);
+    }
+
+    public User(String login, String password) {
+        this.login = login;
+        this.password = password;
     }
 
     public User(String name, boolean deletionMark, Long code, boolean isFolder) {
@@ -280,7 +293,7 @@ public class User extends AbstractCategory{
 //    public void setExecutorTaskFolderStructureUserSet(Set<ExecutorTaskFolderStructure> executorTaskFolderStructureUserSet) {
 //        this.executorTaskFolderStructureUserSet = executorTaskFolderStructureUserSet;
 //    }
-//
+
 //    @SuppressWarnings("unused")
 //    public Set<UserAccessRight> getUserAccessRightSet() {
 //        return userAccessRightSet;

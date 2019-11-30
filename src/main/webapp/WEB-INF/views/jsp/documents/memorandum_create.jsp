@@ -1,20 +1,20 @@
 <%--@elvariable id="Constant" type="enumerations"--%>
-<%@ page import="app_info.Constant" %>
+<%@ page import="com.edi3.core.app_info.Constant" %>
 
-<%@ page import="documents.DocumentProperty" %>
+<%@ page import="com.edi3.core.documents.DocumentProperty" %>
 
 <%--@elvariable id="ProcessOrderType" type="enumerations"--%>
-<%@ page import="enumerations.ProcessOrderType" %>
+<%@ page import="com.edi3.core.enumerations.ProcessOrderType" %>
 
 <%--@elvariable id="PageContainer" type="enumerations"--%>
-<%@ page import="tools.PageContainer" %>
+<%@ page import="com.edi3.web.tools.PageContainer" %>
 
 <%--@elvariable id="ElementStatus" type="enumerations"--%>
-<%@ page import="model.ElementStatus" %>
+<%@ page import="com.edi3.web.model.ElementStatus" %>
 
 <%--??? Is it correct type - or better enumerations ? --%>
 <%--@elvariable id="CommonModule" type="tools.CommonModule"--%>
-<%@ page import="tools.CommonModule" %>
+<%@ page import="com.edi3.web.tools.CommonModule" %>
 
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -176,7 +176,10 @@
 
 </script>
 
-<form method="post" action="${pageContext.request.contextPath}/doc_memorandum_create" autocomplete="off"
+<%--<form method="post" action="${pageContext.request.contextPath}/doc_memorandum_create" autocomplete="off">--%>
+    <%--This is a document--%>
+<%--</form>--%>
+<form method="post" action="${pageContext.request.contextPath}${PageContainer.DOCUMENT_MESSAGE_CREATE_PAGE}" autocomplete="off"
       style="height: 91%"
       name="doc_memorandum_create" id="doc_memorandum_create">
     <div class="left_up_panel">Создание служебной записки</div>
@@ -285,9 +288,33 @@
 </form>
 
 <a href="#" class="overlay_send_to_users" id="form_send_to_users"></a>
-<form method="post" action="${pageContext.request.contextPath}/doc_memorandum_create" class="modal_send_to_users"
+<form method="post" action="${pageContext.request.contextPath}${PageContainer.DOCUMENT_MEMORANDUM_CREATE_PAGE}" class="modal_send_to_users"
       name="menu_send_to_users" id="menu_send_to_users"
       accept-charset="UTF-8">
+</form>
+
+<a href="#" class="overlay_send_to_users" id="form_send_to_users2"></a>
+<form method="post" action="${pageContext.request.contextPath}${PageContainer.DOCUMENT_MEMORANDUM_CREATE_PAGE}" class="modal_send_to_users"
+      name="menu_send_to_users2" id="menu_send_to_users2"
+      accept-charset="UTF-8" enctype="multipart/form-data">
+    <input name="file" type="file"/>
+</form>
+
+<div>create5</div>
+<form method="post" enctype="multipart/form-data" id = "form_create5_file">
+    <input name="file" type="file"/>
+    <input type="hidden" name="post_users[]" value="x" class="post_users" id="post_users"/>
+    <input type="hidden" name="post_order_type[]" value="0" class="post_order_type" id="post_order_type"/>
+    <input type="hidden" name="process_type" value="0" class="process_type" id="process_type"/>
+    <input type="hidden" name="post_process_type[]" value="0" class="post_process_type" id="post_process_type"/>
+    <input type="hidden" name="theme" value="x" id="theme"/>
+    <input type="hidden" name="textInfo" value="x" id="textInfo"/>
+    <input type="hidden" name="param" value="send" id="param"/>
+    <input type="hidden" name="whomId" value="x" id="whomId"/>
+</form>
+<form method="post" enctype="multipart/form-data" action = "${PageContainer.DOCUMENT_MEMORANDUM_CREATE_PAGE}/create5/" id = "form_create5">
+    <input name="file" type="file"/>
+    <input name="choose" class="btn" type="submit" value="Save5" onclick="createMethod5();" formaction="javascript:void(0)"/>
 </form>
 
 <a href="#" class="overlay_choose_users" id="form_choose_users"></a>
@@ -295,7 +322,7 @@
 </form>
 
 <a href="#" class="overlay_choose_one_user" id="form_choose_one_user"></a>
-<form method="post" action="${pageContext.request.contextPath}/doc_memorandum_create" class="modal_choose_one_user"
+<form method="post" action="${pageContext.request.contextPath}${PageContainer.DOCUMENT_MEMORANDUM_CREATE_PAGE}" class="modal_choose_one_user"
       id="menu_choose_one_user">
     <div>Выберите сотрудника:</div>
     <div class="table-wrapper">

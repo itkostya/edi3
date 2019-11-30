@@ -18,6 +18,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "CAT_POSITION")
+//@Entity(name = "position")
+//@Table(schema = "edi3", name = "position")
 public class Position extends AbstractCategory{
 
     @OneToMany(mappedBy = "position")

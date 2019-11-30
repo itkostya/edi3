@@ -1,3 +1,6 @@
+<%--@elvariable id="PageContainer" type="enumerations"--%>
+<%@page import="com.edi3.web.tools.PageContainer" %>
+
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <%--@elvariable id="error_message" type="java.lang.String"--%>
@@ -8,7 +11,7 @@
 </head>
 <body>
 
-<form action="${pageContext.request.contextPath}/user">
+<form action="${pageContext.request.contextPath}${PageContainer.USER_PAGE}">
 
     <table>
         <tr>

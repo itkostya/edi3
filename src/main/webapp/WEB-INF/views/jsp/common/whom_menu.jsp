@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ page import="documents.DocumentProperty" %>
+<%@ page import="com.edi3.core.documents.DocumentProperty" %>
 
 <%--@elvariable id="documentTypeId" type="java.lang.Long"--%>
 <%--@elvariable id="userList" type="java.util.List<categories.User>"--%>
