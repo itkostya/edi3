@@ -10,9 +10,13 @@
           <option name="url" value="https://github.com/itkostya/shares.git" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/itkostya/shop.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
-    <option name="cloneParentDir" value="C:\Project\git\smida" />
+    <option name="cloneParentDir" value="C:\Project\git\shop" />
   </component>
   <component name="Vcs.Log.App.Settings">
     <option name="MIGRATED" value="true" />
